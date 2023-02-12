@@ -12,8 +12,6 @@ import { ContactForm } from '../ContactForm/ContactForm ';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
 
-// const LOCAL_KEY = 'Users-key';
-
 export const App = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
@@ -64,7 +62,6 @@ export const App = () => {
       ) : (
         <>
           {loading && <Loader />}
-
           <Section>
             <h1>Phonebook</h1>
             <ContactForm onContactSubmit={formSubmitHandler} />
