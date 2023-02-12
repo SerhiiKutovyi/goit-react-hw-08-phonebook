@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { fetchContacts, addContact, deleteContact } from './operation';
-// import { nanoid } from 'nanoid';
 
 const handlePending = state => {
   state.isLoading = true;
