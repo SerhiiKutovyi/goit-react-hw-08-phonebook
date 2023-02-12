@@ -1,30 +1,60 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { fetchContacts, addContact, deleteContact } from './operation';
 // import { nanoid } from 'nanoid';
+
+const handlePending = state => {
+  state.isLoading = true;
+};
+
+const handleRejected = (state, action) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
     contacts: [],
     filter: '',
+    isLoading: false,
+    error: null,
   },
   reducers: {
-    addContacts: (state, { payload }) => {
-      state.contacts.push(payload);
-    },
-
-    deleteContacts: (state, action) => {
-      state.contacts = state.contacts.filter(
-        data => data.id !== action.payload
-      );
-    },
-
     filterContacts: (state, action) => {
       state.filter = action.payload;
     },
   },
+  extraReducers: {
+    [fetchContacts.pending]: handlePending,
+    [fetchContacts.fulfilled](state, { payload }) {
+      state.isLoading = false;
+      state.error = null;
+      state.contacts = payload;
+    },
+    [fetchContacts.rejected]: handleRejected,
+
+    [addContact.pending]: handlePending,
+    [addContact.fulfilled](state, { payload }) {
+      state.isLoading = false;
+      state.error = null;
+      state.contacts = [payload, ...state.contacts];
+    },
+    [addContact.rejected]: handleRejected,
+
+    [deleteContact.pending]: handlePending,
+    [deleteContact.fulfilled](state, { payload }) {
+      state.isLoading = false;
+      state.error = null;
+      state.contacts = [
+        ...state.contacts.filter(data => data.id !== payload.id),
+      ];
+    },
+    [deleteContact.rejected]: handleRejected,
+  },
 });
+console.log(111, userSlice);
 
 const persistConfig = {
   key: 'contacts',
@@ -34,5 +64,4 @@ const persistConfig = {
 
 export const contactsReducer = persistReducer(persistConfig, userSlice.reducer);
 
-export const { addContacts, deleteContacts, filterContacts } =
-  userSlice.actions;
+export const { filterContacts } = userSlice.actions;

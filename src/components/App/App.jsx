@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts, deleteContacts, filterContacts } from 'redux/slice';
-import { selectContacts } from 'redux/selector';
+import { filterContacts } from 'redux/slice';
+import { fetchContacts, addContact, deleteContact } from 'redux/operation';
+import { selectContacts, selectIsLoading, selectError } from 'redux/selector';
 import { nanoid } from 'nanoid';
 
+import { Section } from './App.styles';
+import { Loader } from 'components/Loader/Loader';
 import { ContactForm } from '../ContactForm/ContactForm ';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
-
-import { Section } from './App.styles';
 
 // const LOCAL_KEY = 'Users-key';
 
@@ -17,6 +18,11 @@ export const App = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
   const contacts = useSelector(selectContacts);
+  const loading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const filterUsers = event => {
     setFilter(event.target.value);
@@ -24,7 +30,7 @@ export const App = () => {
   };
 
   const deleteUsers = userId => {
-    dispatch(deleteContacts(userId));
+    dispatch(deleteContact(userId));
   };
 
   const verification = () => {
@@ -48,18 +54,26 @@ export const App = () => {
       id: nanoid(),
       ...data,
     };
-    dispatch(addContacts(newUser));
+    dispatch(addContact(newUser));
   }
 
   return (
     <>
-      <Section>
-        <h1>Phonebook</h1>
-        <ContactForm onContactSubmit={formSubmitHandler} />
-        <h2>Contacts</h2>
-        <Filter filter={filter} click={filterUsers} />
-        <ContactList contacts={verification()} deleteUsers={deleteUsers} />
-      </Section>
+      {error ? (
+        <p>Something went wrong</p>
+      ) : (
+        <>
+          {loading && <Loader />}
+
+          <Section>
+            <h1>Phonebook</h1>
+            <ContactForm onContactSubmit={formSubmitHandler} />
+            <h2>Contacts</h2>
+            <Filter filter={filter} click={filterUsers} />
+            <ContactList contacts={verification()} deleteUsers={deleteUsers} />
+          </Section>
+        </>
+      )}
     </>
   );
 };
