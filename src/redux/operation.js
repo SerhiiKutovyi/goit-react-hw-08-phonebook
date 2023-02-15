@@ -69,8 +69,8 @@ export const getCurrentUser = createAsyncThunk(
     }
 
     try {
-      const { data } = await axios.get('/users/current');
       token.setAuthHeader(persistedToken);
+      const { data } = await axios.get('/users/current');
       return data;
     } catch (event) {
       Notify.failure(event.message);

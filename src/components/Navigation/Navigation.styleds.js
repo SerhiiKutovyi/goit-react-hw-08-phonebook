@@ -4,7 +4,8 @@ import styled from 'styled-components';
 export const StyledNavLink = styled(NavLink)`
   margin-bottom: 20px;
   text-decoration: none;
-  display: block;
+  margin-left: auto;
+
   font-size: 24px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
