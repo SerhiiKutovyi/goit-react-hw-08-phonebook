@@ -36,7 +36,7 @@ export const ContactForm = ({ onContactSubmit }) => {
 
   return (
     <FormStyled onSubmit={handleSubmit}>
-      <label htmlFor="Name">Name</label>
+      <label htmlFor="name">Name</label>
       <input
         type="text"
         name="name"
