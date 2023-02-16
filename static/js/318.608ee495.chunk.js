@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgoit_react_hw_08_phonebook=self.webpackChunkgoit_react_hw_08_phonebook||[]).push([[318],{318:function(n,e,t){t.r(e),t.d(e,{default:function(){return u}});var o,r=t(168),a=t(6444).ZP.h1(o||(o=(0,r.Z)(["\n  margin-top: 100px;\n  text-align: center;\n"]))),c=t(3329),u=function(){return(0,c.jsx)(a,{children:"Auf!!! Contacts manager welcome page \ud83d\udc81\u200d\u2640\ufe0f!"})}}}]);
+//# sourceMappingURL=318.608ee495.chunk.js.map
