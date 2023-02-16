@@ -50,7 +50,6 @@ export const Contacts = () => {
       );
     }
   };
-  console.log(333, filter);
 
   function formSubmitHandler(data) {
     if (contacts.find(contact => contact.name === data.name)) {

@@ -17,19 +17,13 @@ export const Navigation = () => {
   };
 
   return (
-    <div
-      className={{
-        display: 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
-      }}
-    >
-      <StyledNavLink to="/"> Home</StyledNavLink>
+    <>
       <NavStyled>
         {isLoggedIn ? (
           <button onClick={logOut}>LogOut</button>
         ) : (
           <ul>
+            <StyledNavLink to="/"> Home</StyledNavLink>
             <LiStyledLogin>
               <StyledNavLink to="/login"> Login</StyledNavLink>
             </LiStyledLogin>
@@ -39,6 +33,6 @@ export const Navigation = () => {
           </ul>
         )}
       </NavStyled>
-    </div>
+    </>
   );
 };

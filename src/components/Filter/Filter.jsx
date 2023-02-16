@@ -3,7 +3,6 @@ import { FilterStyled } from './Filter.styles';
 import { nanoid } from 'nanoid';
 
 export const Filter = ({ click, filter }) => {
-  console.log(111, filter);
   const filterId = nanoid();
   return (
     <>

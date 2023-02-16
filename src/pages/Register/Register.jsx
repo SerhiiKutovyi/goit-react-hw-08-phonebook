@@ -26,29 +26,18 @@ const Register = () => {
           type="text"
           name="name"
           placeholder="Username"
-          // value={name}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
-          // onChange={handleChange}
         />
         <label htmlFor="email"> Email </label>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          // value={name}
-          required
-          // onChange={handleChange}
-        />
+        <input type="email" name="email" placeholder="Email" required />
         <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           placeholder="Password"
-          // value={name}
           required
-          // onChange={handleChange}
         />
         <button type="submit">Register</button>
       </form>
