@@ -29,18 +29,20 @@ export const NavStyled = styled.nav`
   }
 
   button {
-    margin-left: 90%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-
+    margin-left: 30px;
     border: none;
     padding: 5px 15px;
-
     cursor: pointer;
 
     border-radius: 4px;
     background-color: coral;
     color: white;
+  }
+
+  div {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
   }
 `;
 

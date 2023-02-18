@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { signIn } from 'redux/operation';
+import { signIn } from 'redux/auth/operation';
 import { LoginStyled } from './Login.styleds';
 
 const Login = () => {

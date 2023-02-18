@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect /*useState*/ } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterContacts } from 'redux/slice';
-import { fetchContacts, addContact, deleteContact } from 'redux/operation';
+
+import { filterContacts } from 'redux/contacts/slice';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+} from 'redux/contacts/operation';
 import {
   selectContacts,
   selectIsLoading,
   selectError,
-  // selectFilter,
-} from 'redux/selector';
-
-import { nanoid } from 'nanoid';
+  selectFilter,
+} from 'redux/contacts/selector';
+import useAuth from 'hooks/useAuth';
 
 import { Section } from './Contacts.styles';
 import { Loader } from 'components/Loader/Loader';
@@ -18,20 +21,22 @@ import { ContactForm } from '../../components/ContactForm/ContactForm ';
 import { ContactList } from '../../components/ContactList/ContactList';
 import { Filter } from '../../components/Filter/Filter';
 
-export const Contacts = () => {
+const Contacts = () => {
   const dispatch = useDispatch();
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
   const contacts = useSelector(selectContacts);
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  // const filter = useSelector(selectFilter);
+  const filter = useSelector(selectFilter);
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (isLoggedIn) dispatch(fetchContacts());
+  }, [dispatch, isLoggedIn]);
 
   const filterUsers = event => {
-    setFilter(event.target.value);
+    // setFilter(event.target.value);
+    console.log(event.target.value);
     dispatch(filterContacts(event.target.value));
   };
 
@@ -56,11 +61,8 @@ export const Contacts = () => {
       alert(`${data.name} is already in contacts!`);
       return;
     }
-    const newUser = {
-      id: nanoid(),
-      ...data,
-    };
-    dispatch(addContact(newUser));
+
+    dispatch(addContact(data));
   }
 
   return (
@@ -82,3 +84,5 @@ export const Contacts = () => {
     </>
   );
 };
+
+export default Contacts;

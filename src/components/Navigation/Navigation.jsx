@@ -1,6 +1,6 @@
 import useAuth from 'hooks/useAuth';
 import { useDispatch } from 'react-redux';
-import { signOut } from 'redux/operation';
+import { signOut } from 'redux/auth/operation';
 import {
   StyledNavLink,
   NavStyled,
@@ -9,9 +9,10 @@ import {
 } from './Navigation.styleds';
 
 export const Navigation = () => {
+  // const username = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   const logOut = () => {
     dispatch(signOut());
   };
@@ -20,7 +21,10 @@ export const Navigation = () => {
     <>
       <NavStyled>
         {isLoggedIn ? (
-          <button onClick={logOut}>LogOut</button>
+          <div>
+            <span>{user.name}</span>
+            <button onClick={logOut}>LogOut</button>
+          </div>
         ) : (
           <ul>
             <StyledNavLink to="/"> Home</StyledNavLink>

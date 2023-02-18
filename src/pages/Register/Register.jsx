@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { signUp } from 'redux/operation';
+import { signUp } from 'redux/auth/operation';
 import { FormStyled } from './Register.styleds';
 
 const Register = () => {

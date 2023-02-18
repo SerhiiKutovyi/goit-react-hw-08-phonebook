@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { contactsReducer } from './slice';
+import { authReducer } from './auth/slice';
+import { contactsReducer } from './contacts/slice';
 import {
   persistStore,
   FLUSH,
@@ -12,7 +13,8 @@ import {
 
 export const store = configureStore({
   reducer: {
-    user: contactsReducer,
+    auth: authReducer,
+    contacts: contactsReducer,
   },
   //Error with non-serialized function in action
   middleware(getDefaultMiddleware) {

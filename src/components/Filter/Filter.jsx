@@ -26,5 +26,5 @@ export const Filter = ({ click, filter }) => {
 
 Filter.propTypes = {
   click: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+  filter: PropTypes.string,
 };

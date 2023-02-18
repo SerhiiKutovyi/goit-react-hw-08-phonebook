@@ -1,13 +1,14 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Layout } from 'components/Layout/Layout';
 import { lazy } from 'react';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+// import NotFound from 'pages/NotFound/NotFound';
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Login = lazy(() => import('pages/Login/Login'));
 const Register = lazy(() => import('pages/Register/Register'));
-const UserMenu = lazy(() => import('pages/UserMenu/UserMenu'));
+const Contacts = lazy(() => import('pages/Contacts/Contacts'));
 
 function AppRoutes() {
   return (
@@ -17,7 +18,7 @@ function AppRoutes() {
           <Route
             index
             element={
-              <PublicRoute redirectTo="/usermenu">
+              <PublicRoute redirectTo="/contacts">
                 <Home />
               </PublicRoute>
             }
@@ -25,7 +26,7 @@ function AppRoutes() {
           <Route
             path="/login"
             element={
-              <PublicRoute redirectTo="/usermenu">
+              <PublicRoute redirectTo="/contacts">
                 <Login />
               </PublicRoute>
             }
@@ -33,20 +34,21 @@ function AppRoutes() {
           <Route
             path="/register"
             element={
-              <PublicRoute redirectTo="/usermenu">
+              <PublicRoute redirectTo="/contacts">
                 <Register />
               </PublicRoute>
             }
           />
           <Route
-            path="/usermenu"
+            path="/contacts"
             element={
               <PrivateRoute redirectTo="/login">
-                <UserMenu />
+                <Contacts />
               </PrivateRoute>
             }
           />
         </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
